@@ -1,0 +1,26 @@
+ <h3>A man with a plan</h3>
+                    <pre><code class="language-js">let searchDepthFirst = function(problem, state, depthLimit) {
+    if(problem.isGoal(state)) 
+        return [];
+    else if (depthLimit === 0)
+        return undefined;
+
+    let actions = problem.actions(state);
+    for (let action of actions) {
+        let nextState = problem.transition(state, action);
+        let solution = searchDepthFirst(problem, nextState, depthLimit - 1);
+        if(typeof solution !== 'undefined')
+            return [action].concat(solution);
+    }
+
+    return undefined;
+};</code></pre>
+
+                    <div class="visCont">
+                        <div id="graph1"></div>
+                        <canvas class="visOverlay" id="overlayGraph1" width="300px" height="300px"></canvas>
+                    </div>
+                    <div class="btn-group mt-2">
+                        <button type="button" class="btn btn-secondary" id="step1">Step</button>
+                        <button type="button" class="btn btn-secondary" id="reset1">Reset</button>                        
+                    </div>

@@ -1,0 +1,3 @@
+We can use <i>areEqual(stateA, stateB)</i> to detect that our agent is walking in circles.<br/>
+"Open cupboard", "Open fridge", "Close cupboard" - we keep encountering new states, but they don't contribute to the goal.<br/>
+Can we do without iterative deepening now, that we can detect already encountered states in the same run? Not quite.
