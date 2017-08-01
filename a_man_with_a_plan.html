@@ -1,4 +1,33 @@
- <h3>A man with a plan</h3>
+<html>
+    <head>
+        <title>Code Sorcery - A man with a plan</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/prism.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+        <link rel="stylesheet" href="css/my.css">
+    </head>
+    <body>            
+        <div class="container"> 
+            <div class="row my-header">
+                <span>Code sorcery</span>                
+            </div>
+            <div class="row flex-row-reverse">   
+                <div class="col-lg-4 my-nav">
+                    <div>
+                        <h6>Series</h6>
+                        Quest for better AI
+                        <ol>
+                            <a href="index.html"><li>AI in games</li></a>
+                            <em><li>A man with a plan</li></em>
+                        </ol>
+                    </div>       
+                </div>          
+                <div class="col-lg-8">
+                <h3>A man with a plan</h3>
+                <em>August 2nd 2017</em><br/><br/>
+
+
                     <pre><code class="language-js">let searchDepthFirst = function(problem, state, depthLimit) {
     if(problem.isGoal(state)) 
         return [];
@@ -24,3 +53,25 @@
                         <button type="button" class="btn btn-secondary" id="step1">Step</button>
                         <button type="button" class="btn btn-secondary" id="reset1">Reset</button>                        
                     </div>
+
+                    </div>
+            <div class="row my-footer">
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="js/prism.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
+
+        <!-- <script src="https://unpkg.com/vue"></script> -->
+        <script src="js/search.js"></script>
+        <script>  
+            //setTimeout(function() { nodes.update({id:1, color:'red'});  }, 2000);
+            //document.write(JSON.stringify(nodes));            
+            //nodes.add([{id: 1, label: 'Nod'}]);            
+        </script>        
+    </body>
+</html>

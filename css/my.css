@@ -6,6 +6,23 @@
     font-size: 80px
 }
 
+.my-nav {
+    padding: 0;
+}
+
+.my-nav > div {    
+    margin: 0; 
+    padding-left: 15px; 
+    padding-bottom: 15px;
+    padding-top: 13px;
+}
+
+@media (min-width: 992px) { 
+    .my-nav > div {
+        border-left: 1px solid lightgray; 
+    }
+}
+
 .my-footer {
     height: 200px;
     background:url(../img/temp_footer.png) 0 0 no-repeat; 
