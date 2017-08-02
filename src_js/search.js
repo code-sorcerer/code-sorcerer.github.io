@@ -44,25 +44,17 @@ let kitchen1 = {
     init: {
         cupboard: {open: false, inside: ['cup']},
         fridge: {open: false, inside: ['milk']},
-        table: [],
-        walkedAway: false
+        table: []       
     },
 
     actions(state) {
-        let actions = [];
+        let actions = [];        
 
-        if(state.walkedAway) 
-            return actions;
+        if(!state.cupboard.open) actions.push('open cupboard');
+        else actions.push('close cupboard');
 
-        if(!state.cupboard.open) 
-            actions.push('open cupboard');
-        else 
-            actions.push('close cupboard');
-
-        if(!state.fridge.open) 
-            actions.push('open fridge');
-        else
-            actions.push('close fridge');
+        if(!state.fridge.open) actions.push('open fridge');
+        else actions.push('close fridge');
 
         if(state.cupboard.open && _.includes(state.cupboard.inside, 'cup')) 
             actions.push('get cup');
@@ -71,15 +63,15 @@ let kitchen1 = {
             actions.push('get milk');
 
         if(_.includes(state.table, 'milk'))
-            actions.push('pour milk');       
+            actions.push('pour milk');  
         
-        actions.push('walk away');
         return actions;
     },
 
     transition(state, action) {
-        state = _.cloneDeep(state);        
-
+        //Not mutating passed state is important
+        //for Vasiliy's mental calculations
+        state = _.cloneDeep(state);  
         switch(action) {            
             case 'open cupboard': state.cupboard.open = true; break;
             case 'close cupboard': state.cupboard.open = false; break;
@@ -100,12 +92,8 @@ let kitchen1 = {
                     _.pull(state.table, 'cup')
                     state.table.push('cup of milk');
                 }
-                break;
-            case 'walk away':
-                state.walkedAway = true;
-                break;
+                break;           
         }
-
         return state;
     },
 
@@ -282,7 +270,7 @@ module.exports = {
 };
 
 
-//console.log(searchIterativeDeepeningEqualCheckLogged(vacuum, vacuum.init, 8));
+//console.log(searchIterativeDeepeningEqualCheck(kitchen1, kitchen1.init, 8));
 
 //console.log(_.set('cupboard.open')(true)(kitchen1.init));
 //console.log(kitchen1.init);
