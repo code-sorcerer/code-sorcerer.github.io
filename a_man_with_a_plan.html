@@ -1,205 +1,133 @@
 <html>
-    <head>
-        <title>Code Sorcery - A man with a plan</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="css/prism.css"> -->
-        <link rel="stylesheet" href="css/codemirror.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
-        <link rel="stylesheet" href="css/my.css">
-    </head>
-    <body>            
-        <div class="container"> 
-            <div class="row my-header">
-                <span>Code sorcery</span>                
+<head>
+    <title>Code Sorcery - A man with a plan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/prism.css"> -->
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link rel="stylesheet" href="css/my.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row my-header">
+            <span>Code sorcery</span>
+        </div>
+        <div class="row flex-row-reverse">
+            <div class="col-lg-4 my-nav">
+                <div>
+                    <h6>Series</h6>
+                    On a quest for better NPC AI
+                    <ol>
+                        <a href="index.html">
+                            <li>AI in games</li>
+                        </a>
+                        <em><li>A man with a plan</li></em>
+                    </ol>
+                </div>
             </div>
-            <div class="row flex-row-reverse">   
-                <div class="col-lg-4 my-nav">
-                    <div>
-                        <h6>Series</h6>
-                        On a quest for better NPC AI
-                        <ol>
-                            <a href="index.html"><li>AI in games</li></a>
-                            <em><li>A man with a plan</li></em>
-                        </ol>
-                    </div>       
-                </div>          
-                <div class="col-lg-8">
+            <div class="col-lg-8">
                 <h3>A man with a plan</h3><br/>
                 <!-- <em>August 2nd 2017</em><br/><br/> -->
 
                 <div class="card">
-                <div class="card-block">
-                    <h6 class="card-title">Previously on Code Sorcery:</h6>
-                    <p class="card-text">
-                        Unsatisfied with the current state of affairs in game AI development, brave Code Sorcerer embarked on a quest 
-                        to explore ins and outs of creating intelligent NPCs in the land of a yet-non-existent text-based role-playing game.
-                    </p>
-                </div>
+                    <div class="card-block">
+                        <h6 class="card-title">Previously on Code Sorcery:</h6>
+                        <p class="card-text">
+                            Unsatisfied with the current state of affairs in game AI development, brave Code Sorcerer embarked on a quest to explore
+                            ins and outs of creating intelligent NPCs in the land of a yet-non-existent text-based role-playing
+                            game.
+                        </p>
+                    </div>
                 </div><br/>
 
-                <p>How our NPC AI playground text RPG should look like? Let's start simple: some situation is shown to the player, 
-                and the player must choose what to do from a fixed list of available choices.
-                After the player chooses - the game calculates what happens and he sees the next situation. Since we want our game world to be inhabited by intelligent, 
-                independent NPCs, they should be able to do the same: choose an <em>action</em> from the set of actions given a situation - <em>a state</em>. 
-                We want our NPCs to do complex things like going to work, buying, cooking and eating food, even investigating a crime (if this NPC works for police).
-                How are they supposed to choose actions to achieve that?</p>
+                <p>How our NPC AI playground text RPG should look like? Let's start simple: some situation is shown to the player,
+                    and the player must choose what to do from a fixed list of available choices. After the player chooses
+                    - the game calculates what happens and he sees the next situation. Since we want our game world to be
+                    inhabited by intelligent, independent NPCs, they should be able to do the same: choose an <em>action</em>                    
+                    from the set of actions given a situation - <em>a state</em>. We want our NPCs to do complex things like
+                    going to work, buying, cooking and eating food, even investigating a crime (if this NPC works for police).
+                    How are they supposed to choose actions to achieve that?</p>
 
-                <p>There are several approaches to this in the literature, but let's consider how does the human player do it? Usually, a human wants to achieve some pretty high-level
-                <em>goal</em> like "I should make a breakfast" and constructs a complex plan of rather simple actions required to do it, given all he knows ("eggs 
-                are in the fridge, the fridge is in the kitchen: let's go to the kitchen and open the fridge"). Can we build a system like this - simple actions 
-                (and, consequently, simple simulation logic) and complex states? If we leave the problem of high-level goal selection till later - why not?</p>
+                <p>There are several approaches to this in the literature, but let's consider how does the human player do it?
+                    Usually, a human wants to achieve some pretty high-level
+                    <em>goal</em> like "I should make a breakfast" and constructs a complex plan of rather simple actions
+                    required to do it, given all he knows ("eggs are in the fridge, the fridge is in the kitchen: let's go
+                    to the kitchen and open the fridge"). Can we build a system like this - simple actions (and, consequently,
+                    simple simulation logic) and complex states? If we leave the problem of high-level goal selection till
+                    later - why not?</p>
 
-                <p class="lead">Planning given <em>state</em>, <em>goal</em> and a set of <em>actions</em> seems to be a good bet - 
-                                we could craft a detailed, believable world where we can see NPCs interacting with it pursuing their goals.
+                <p class="lead">Planning given <em>state</em>, <em>goal</em> and a set of <em>actions</em> seems to be a good bet - we could
+                    craft a detailed, believable world where we can see NPCs interacting with it pursuing their goals.
                 </p>
                 <p>As a comforting side note - this is basically what F.E.A.R. guys did.</p>
-                
+
                 <div class="card">
-                <div class="card-block">                   
-                    <p class="card-text">
-                        We'll be using JavaScript for code samples. I consider the language choice is of no importance for a Code Sorcerer is a master of many,
-                        but we can do cool demos right in your browser using js. "_.someMethod" is the <a href="https://lodash.com/docs">Lodash library</a>.
-                    </p>
-                </div>
+                    <div class="card-block">
+                        <p class="card-text">
+                            We'll be using JavaScript for code samples. I consider the language choice is of no importance for a Code Sorcerer is a master
+                            of many, but we can do cool demos right in your browser using js. "_.someMethod" is the
+                            <a
+                                href="https://lodash.com/docs">Lodash library</a>. Don't hesitate to use the "Run" button.
+                        </p>
+                    </div>
                 </div><br/>
-                <p>Consider a humble task of fetching yourself a cup of milk. Our first NPC - let's give him a name - Vasiliy should be able to do that at the very least.
-                Or else he'll die in our harsh world - a small town in the northern Soviet Russia (you can already tell I really dislike generic fantasy). 
-                The environment - a kitchen - should include starting state
-                <em>init</em>, a function that returns available actions in any given state and a function that returns a result of 
-                doing given action in a given state - a <em>transition</em> function. </p>
-                <textarea id="code1">                  
-                </textarea><br/>
+                <p>Consider a humble task of fetching yourself a cup of milk. Our first NPC - let's give him a name - Vasiliy
+                    should be able to do that at the very least. Or else he'll die in our harsh world - a small town in the
+                    northern Soviet Russia (you can already tell I really dislike generic fantasy). The environment - a kitchen
+                    - should include starting state
+                    <em>init</em>, a function that returns available actions in any given state and a function that returns
+                    a result of doing given action in a given state - a <em>transition</em> function. </p>
+                <textarea id="code1"></textarea><br/>
                 <button type="button" class="btn btn-secondary" id="runCode1">Run</button>
-<p>Quite a complex environment for such a small code sample. We've added actions that remove and add objects from and to containters,
-change containers state (open/closed) and interact with multiple objects. There are <em>disastrous</em> actions:
-if Vasiliy tries to use a carton of milk without a cup on a table he'll spill it. We could design this differently - allow
-all possible actions in the "actions" function and make such that impossible or redundant actions (trying to close an already closed fridge for example) 
-do nothing in "transition" function.
-</p>
+                <p>Quite a complex environment for such a small code sample. We've added actions that remove and add objects
+                    from and to containters, change containers state (open/closed) and interact with multiple objects. There
+                    are <em>disastrous</em> actions: if Vasiliy tries to use a carton of milk without a cup on a table he'll
+                    spill it. We could design this differently - allow all possible actions in the "actions" function and
+                    make such that impossible or redundant actions (trying to close an already closed fridge for example)
+                    do nothing in "transition" function.
+                </p>
 
-                
-                In the most simple case Vasiliy knows everything about the environment,
-                for example, he knows that 
+                In the most simple case Vasiliy knows everything about the environment, for example, he knows that
 
+                <textarea id="code2"></textarea><br/>
+                <button type="button" class="btn btn-secondary" id="runCode2">Run</button>
 
+                <!-- <div class="visCont">
+                    <div id="graph1"></div>
+                    <canvas class="visOverlay" id="overlayGraph1" width="300px" height="300px"></canvas>
+                </div>
+                <div class="btn-group mt-2">
+                    <button type="button" class="btn btn-secondary" id="step1">Step</button>
+                    <button type="button" class="btn btn-secondary" id="reset1">Reset</button>
+                </div> -->
 
-                
-
-
-                    <!-- <pre><code class="language-js">let searchDepthFirst = function(problem, state, depthLimit) {
-    if(problem.isGoal(state)) 
-        return [];
-    else if (depthLimit === 0)
-        return undefined;
-
-    let actions = problem.actions(state);
-    for (let action of actions) {
-        let nextState = problem.transition(state, action);
-        let solution = searchDepthFirst(problem, nextState, depthLimit - 1);
-        if(typeof solution !== 'undefined')
-            return [action].concat(solution);
-    }
-
-    return undefined;
-};</code></pre> -->
-
-                    <div class="visCont">
-                        <div id="graph1"></div>
-                        <canvas class="visOverlay" id="overlayGraph1" width="300px" height="300px"></canvas>
-                    </div>
-                    <div class="btn-group mt-2">
-                        <button type="button" class="btn btn-secondary" id="step1">Step</button>
-                        <button type="button" class="btn btn-secondary" id="reset1">Reset</button>                        
-                    </div>
-
-                    </div>
-            
-        </div>
-                <div class="row my-footer">
             </div>
 
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        </div>
+        <div class="row my-footer">
+        </div>        
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
         <script src="js/prism.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.20.1/vis.min.js"></script>
-
-        <!-- <script src="https://unpkg.com/vue"></script> -->
+       
         <script src="js/search.js"></script>
         <script src="js/codemirror.js"></script>
         <script src="js/javascript.js"></script>
-        <script>  
-             let codeMirror1 = CodeMirror.fromTextArea(document.getElementById('code1'), {                
-                lineNumbers: true,
-                mode:  'javascript'
-             });
+        <script src="js/my.js"></script>
+        <script>
+            loadCodeMirror('code1', 'runCode1', 'reloadCode1', 'js/code_samples/kitchen.js');
+            loadCodeMirror('code2', 'runCode2', 'reloadCode2', 'js/code_samples/searchDepthFirst.js');
+        </script>
+</body>
 
-             codeMirror1.setValue(`let kitchen = {
-    init: {
-        cupboard: {open: false, inside: ['cup']},
-        fridge: {open: false, inside: ['milk']},
-        table: []       
-    },
-
-    actions(state) {
-        let actions = [];        
-
-        if(!state.cupboard.open) actions.push('open cupboard');
-        else actions.push('close cupboard');
-
-        if(!state.fridge.open) actions.push('open fridge');
-        else actions.push('close fridge');
-
-        if(state.cupboard.open && _.includes(state.cupboard.inside, 'cup')) 
-            actions.push('get cup');
-        
-        if(state.fridge.open && _.includes(state.fridge.inside, 'milk'))
-            actions.push('get milk');
-
-        if(_.includes(state.table, 'milk'))
-            actions.push('pour milk');  
-        
-        return actions;
-    },
-
-    transition(state, action) {
-        //Not mutating passed state is important
-        //for Vasiliy's mental calculations
-        state = _.cloneDeep(state);  
-        switch(action) {            
-            case 'open cupboard': state.cupboard.open = true; break;
-            case 'close cupboard': state.cupboard.open = false; break;
-            case 'open fridge': state.fridge.open = true; break;
-            case 'close fridge': state.fridge.open = false; break;
-            case 'get cup':
-                _.pull(state.cupboard.inside, 'cup');
-                state.table.push('cup');                
-                break;
-            case 'get milk':
-                _.pull(state.fridge.inside, 'milk');
-                state.table.push('milk');
-                break;
-            case 'pour milk':
-                if(!_.includes(state.table, 'cup'))
-                    state.table.push('spilled milk');
-                else {
-                    _.pull(state.table, 'cup')
-                    state.table.push('cup of milk');
-                }
-                break;           
-        }
-        return state;
-    }
-};
-
-JSON.stringify(kitchen.transition(kitchen.init, 'open fridge'));`);    
-        document.getElementById('runCode1').addEventListener('click', function() {
-            let code1 = codeMirror1.getValue();
-            let result = eval(code1);
-            alert(result);
-        });
-        </script>        
-    </body>
 </html>
