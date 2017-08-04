@@ -36,52 +36,54 @@
                     <div class="card-block">
                         <h6 class="card-title">Previously on Code Sorcery:</h6>
                         <p class="card-text">
-                            Unsatisfied with the current state of affairs in game AI development, brave Code Sorcerer embarked on a quest to explore
-                            ins and outs of creating intelligent NPCs in the land of a yet-non-existent text-based role-playing
+                            Unsatisfied with the current state of affairs in the game AI development, brave Code Sorcerers have
+                            embarked on a quest to explore ins and outs of creating intelligent NPCs in the land of a yet-non-existent text-based role-playing
                             game.
                         </p>
                     </div>
                 </div><br/>
 
-                <p>How our NPC AI playground text RPG should look like? Let's start simple: some situation is shown to the player,
-                    and the player must choose what to do from a fixed list of available choices. After the player chooses
-                    - the game calculates what happens and he sees the next situation. Since we want our game world to be
-                    inhabited by intelligent, independent NPCs, they should be able to do the same: choose an <em>action</em>                    
+                <p>How is our RPG going to look like? Assume it shows some situation to the player
+                    and she must choose what to do from a fixed list of choices. When she does -
+                    the game calculates what happens and shows the next situation and choices. Since we want our game world to be
+                    inhabited by intelligent NPCs, they must be able to do the same: choose an <em>action</em>                    
                     from the set of actions given a situation - <em>a state</em>. We want our NPCs to do complex things like
-                    going to work, buying, cooking and eating food, even investigating a crime (if this NPC works for police).
+                    going to work, buying, cooking and eating food, even investigating a crime (if an NPC works for the police).
                     How are they supposed to choose actions to achieve that?</p>
 
-                <p>There are several approaches to this in the literature, but let's consider how does the human player do it?
-                    Usually, a human wants to achieve some pretty high-level
-                    <em>goal</em> like "I should make a breakfast" and constructs a complex plan of rather simple actions
-                    required to do it, given all he knows ("eggs are in the fridge, the fridge is in the kitchen: let's go
-                    to the kitchen and open the fridge"). Can we build a system like this - simple actions (and, consequently,
-                    simple simulation logic) and complex states? If we leave the problem of high-level goal selection till
-                    later - why not?</p>
+                <p>There are many approaches to this in the literature, but how would the human player do it?
+                    Usually, a human wants to achieve some high-level
+                    <em>goal</em> like "Make a breakfast" and constructs a complex plan of actions given all he knows 
+                    ("eggs are in the fridge, the fridge is in the kitchen: go
+                    to the kitchen and open the fridge etc."). Setting aside the problem of high-level goal selection 
+                    (we're going to return to it later) we can try to imitate this.</p>
 
-                <p class="lead">Planning given <em>state</em>, <em>goal</em> and a set of <em>actions</em> seems to be a good bet - we could
-                    craft a detailed, believable world where we can see NPCs interacting with it pursuing their goals.
-                </p>
-                <p>As a comforting side note - this is basically what F.E.A.R. guys did.</p>
+                <p class="lead">Planning with <em>a state</em>, <em>a goal</em> and a set of <em>actions</em> seems to be a good bet - we could
+                    craft a detailed, believable world where NPCs would interact with it pursuing their goals.
+                </p>              
 
                 <div class="card">
                     <div class="card-block">
                         <p class="card-text">
-                            We'll be using JavaScript for code samples. I consider the language choice is of no importance for a Code Sorcerer is a master
-                            of many, but we can do cool demos right in your browser using js. "_.someMethod" is the
-                            <a
-                                href="https://lodash.com/docs">Lodash library</a>. Don't hesitate to use the "Run" button.
+                            We're going to use JavaScript for code samples. Sorceries can be cast in any language, but only with JS we can do it right in the browser.
+                            "_.someMethod" is the mighty <a href="https://lodash.com/docs">Lodash library</a>. Feel free to use the "Run" button. Is does <em>magic</em>.
                         </p>
                     </div>
                 </div><br/>
-                <p>Consider a humble task of fetching yourself a cup of milk. Our first NPC - let's give him a name - Vasiliy
-                    should be able to do that at the very least. Or else he'll die in our harsh world - a small town in the
-                    northern Soviet Russia (you can already tell I really dislike generic fantasy). The environment - a kitchen
-                    - should include starting state
-                    <em>init</em>, a function that returns available actions in any given state and a function that returns
-                    a result of doing given action in a given state - a <em>transition</em> function. </p>
-                <textarea id="code1"></textarea><br/>
-                <button type="button" class="btn btn-secondary" id="runCode1">Run</button>
+                <h5>The first challenge</h5>
+                <p>Consider a humble task of fetching yourself a cup of milk. A possible plan goes like this: open the cupboard, put a cup on the table,
+                    open the fridge, put a carton of milk on the table, pour milk into the cup. Our NPC Vasiliy
+                    should be able to do at least that. Or else he would die in our harsh world - a small town in the
+                    northern Soviet Russia (you can already tell I dislike generic fantasy). The environment - a kitchen
+                    - includes a starting state
+                    <em>init</em>, a function that returns <em>actions available</em> in a state and a function that returns
+                    the result of an action in a state - a <em>transition</em> function. </p>
+                <textarea id="code1"></textarea>
+                <div class="btn-group" role="group" style="margin: 2px 0px 0px 30px">
+                    <button type="button" class="btn btn-secondary btn-sm" id="runCode1">Run</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="reloadCode1">Reset</button>                    
+                </div>
+
                 <p>Quite a complex environment for such a small code sample. We've added actions that remove and add objects
                     from and to containters, change containers state (open/closed) and interact with multiple objects. There
                     are <em>disastrous</em> actions: if Vasiliy tries to use a carton of milk without a cup on a table he'll
@@ -92,8 +94,8 @@
 
                 In the most simple case Vasiliy knows everything about the environment, for example, he knows that
 
-                <textarea id="code2"></textarea><br/>
-                <button type="button" class="btn btn-secondary" id="runCode2">Run</button>
+                <textarea id="code2"></textarea>
+                
 
                 <!-- <div class="visCont">
                     <div id="graph1"></div>

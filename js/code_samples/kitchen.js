@@ -1,8 +1,8 @@
-let kitchenStateToStr = function(state) {
+let stateToStr = function(state) {  
     let openToStr = isOpen => isOpen ? 'open' : 'closed';
 
     return 'Cupboard(' + openToStr(state.cupboard.open) + ')[' + _.join(state.cupboard.inside, ',') + ']; '
-           + 'Fridge(' + openToStr(state.fridge.open) + ')[' + _.join(state.fridge.inside, ',') + ']; ' +
+           + 'Fridge(' + openToStr(state.fridge.open) + ')[' + _.join(state.fridge.inside, ',') + ']; '
            + 'Table[' + _.join(state.table, ',') + ']';
 };
         
@@ -64,3 +64,5 @@ let kitchen = {
         return state;
     }
 };
+
+print(stateToStr(kitchen.init));

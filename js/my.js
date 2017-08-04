@@ -2,6 +2,7 @@ let loadCodeMirror = function(mirrorId, runButtonId, resetButtonId, codeUrl) {
     $.ajax({
         url: codeUrl, 
         context: document.body,
+        dataType: 'text',
         success: function(_response) {
             let _respLines = _response.split('\n');
             let _publicIdx = _.findIndex(_respLines, x => x.startsWith('//--public--'));
